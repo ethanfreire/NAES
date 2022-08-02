@@ -1,7 +1,4 @@
-import "./categories.styles.scss";
-
-import CategoryItem from "./components/category-item/category-item.component";
-
+import Directory from "./components/directory/directory.component";
 const App = () => {
   const categories = [
     {
@@ -34,16 +31,7 @@ const App = () => {
         "https://thumbs.dreamstime.com/z/technology-travel-blogger-hi-tech-gadget-accessories-95191717.jpg",
     },
   ];
-
-  return (
-    <div className="categories-container">
-      {categories.map((category) => {
-        return (
-          <CategoryItem key={category.id} category={category}></CategoryItem>
-        );
-      })}
-    </div>
-  );
+  return <Directory categories={categories}></Directory>;
 };
 
 export default App;
