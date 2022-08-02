@@ -4,35 +4,35 @@ const App = () => {
       <div className='category-container'>
         {/* <img /> */}
         <div className='category-body-container'>
-          <h2>Hats</h2>
+          <h2>Desktop</h2>
           <p>Shop Now</p>
         </div>
       </div>
       <div className='category-container'>
         {/* <img /> */}
         <div className='category-body-container'>
-          <h2>Jackets</h2>
+          <h2>Laptop</h2>
           <p>Shop Now</p>
         </div>
       </div>
       <div className='category-container'>
         {/* <img /> */}
         <div className='category-body-container'>
-          <h2>Sneakers</h2>
+          <h2>Tablet</h2>
           <p>Shop Now</p>
         </div>
       </div>
       <div className='category-container'>
         {/* <img /> */}
         <div className='category-body-container'>
-          <h2>Womens</h2>
+          <h2>Phones</h2>
           <p>Shop Now</p>
         </div>
       </div>
       <div className='category-container'>
         {/* <img /> */}
         <div className='category-body-container'>
-          <h2>Mens</h2>
+          <h2>Accessories</h2>
           <p>Shop Now</p>
         </div>
       </div>
