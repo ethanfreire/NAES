@@ -1,4 +1,5 @@
-import "../sign-up-form/sign-up-form.styles.scss";
+import FormInput from "../../components/form-input/form-input.component";
+import "../sign-up/sign-up.styles.scss"
 import { useState } from "react";
 import {
   createAuthUserWithEmailAndPassword,
@@ -11,7 +12,7 @@ const defaultFormFields = {
   confirmPassword: "",
 };
 
-const SignUpForm = () => {
+const SignUp = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { username, email, password, confirmPassword } = formFields;
   console.log(formFields);
@@ -59,47 +60,58 @@ const SignUpForm = () => {
   };
 
   return (
-    <div>
-      <h1>Sing up with your email and password</h1>
+    <div className='sign-up-container'>
+      <h2>Don't have an account?</h2>
+      <span>Sign up with your email and password</span>
+
       <form action="" onSubmit={handleSubmit}>
-        <label>Username</label>
-        <input
-          type="text"
-          required
-          onChange={handleChange}
-          name="username"
-          value={username}
+        <FormInput
+          label="Username"
+          inputOptions={{
+            type: "text",
+            required: true,
+            onChange: handleChange,
+            name: "username",
+            value: username,
+          }}
         />
 
-        <label>Email</label>
-        <input
-          type="email"
-          required
-          onChange={handleChange}
-          name="email"
-          value={email}
+        <FormInput
+          label="Email"
+          inputOptions={{
+            type: "email",
+            required: true,
+            onChange: handleChange,
+            name: "email",
+            value: email,
+          }}
         />
 
-        <label>Password</label>
-        <input
-          type="password"
-          required
-          onChange={handleChange}
-          name="password"
-          value={password}
+        <FormInput
+          label="Password"
+          inputOptions={{
+            type: "password",
+            required: true,
+            onChange: handleChange,
+            name: "password",
+            value: password,
+          }}
         />
 
-        <label>Confirm Password</label>
-        <input
-          type="password"
-          required
-          onChange={handleChange}
-          name="confirmPassword"
-          value={confirmPassword}
+        <FormInput
+          label="Confirm Password"
+          inputOptions={{
+            type: "password",
+            required: true,
+            onChange: handleChange,
+            name: "confirmPassword",
+            value: confirmPassword,
+          }}
         />
+
         <button type="submit">Sign Up</button>
       </form>
     </div>
   );
 };
-export default SignUpForm;
+export default SignUp;
