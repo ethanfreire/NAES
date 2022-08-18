@@ -1,8 +1,12 @@
 .sign-up-container {
-    display: flex;
-    flex-direction: column;
-    width: 24em;
+    width: 57em;
+    margin: 2em auto;
+
     h2 {
         margin: 0.6em 0;
+    }
+
+    .button-container {
+        display:flex;
     }
 }

@@ -1,9 +1,9 @@
 import { Outlet, Link } from "react-router-dom";
 import { Fragment } from "react";
 import { ReactComponent as NaesLogo } from "../../assets/naes web logo.svg";
-import "../navigation/navigation.styles.scss";
+import "./navigation-bar.styles.scss";
 
-const Navigation = () => {
+const NavigationBar = () => {
   return (
     <Fragment>
       <div className="navigation">
@@ -12,7 +12,7 @@ const Navigation = () => {
         </Link>
         <div className="nav-links-container">
           <Link className="nav-link" to="/shop">
-            SHOP
+            Shop
           </Link>
           <Link className="nav-link" to="/sign-in">
             Sign In
@@ -26,4 +26,4 @@ const Navigation = () => {
     </Fragment>
   );
 };
-export default Navigation;
+export default NavigationBar;
