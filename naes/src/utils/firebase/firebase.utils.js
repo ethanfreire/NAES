@@ -1,6 +1,4 @@
-import {
-  initializeApp
-} from "firebase/app";
+import { initializeApp } from "firebase/app";
 import {
   getAuth,
   signInWithPopup,
@@ -8,14 +6,9 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
-  onAuthStateChanged
+  onAuthStateChanged,
 } from "firebase/auth";
-import {
-  getFirestore,
-  getDoc,
-  setDoc,
-  doc
-} from "firebase/firestore";
+import { getFirestore, getDoc, setDoc, doc } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -54,14 +47,12 @@ export const createUserDocumentFromAuth = async (
 
   //if user does not exist
   if (!userSnapshot.exists()) {
-    const {
-      username,
-      email
-    } = userAuth;
+    const { displayName, email } = userAuth;
     const createdAt = new Date();
-
+    const username = displayName;
     try {
       //create new user
+
       await setDoc(userDocsRef, {
         username,
         email,
@@ -90,4 +81,5 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
 
 export const signOutUser = async () => await signOut(auth);
 
-export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth,callback);
+export const onAuthStateChangedListener = (callback) =>
+  onAuthStateChanged(auth, callback);

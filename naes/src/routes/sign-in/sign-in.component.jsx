@@ -1,6 +1,5 @@
 import {
   signInWithGooglePopup,
-  createUserDocumentFromAuth,
   signInAuthUserWithEmailAndPassword,
 } from "../../utils/firebase/firebase.utils";
 import "../sign-in/sign-in.styles.scss";
@@ -15,13 +14,11 @@ const SignIn = () => {
   };
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
-  //console.log(formFields);
 
   const navigate = useNavigate();
 
   const signInWithGoogle = async () => {
-    const { user } = await signInWithGooglePopup();
-    await createUserDocumentFromAuth(user);
+    await signInWithGooglePopup();
     console.log("You've successfully sign in with google popup");
     navigateToHomePage();
   };
@@ -50,7 +47,6 @@ const SignIn = () => {
         email,
         password
       );
-      console.log(user);
       //useState Hooks causes re-rendering
       resetFormFields();
       navigateToHomePage();

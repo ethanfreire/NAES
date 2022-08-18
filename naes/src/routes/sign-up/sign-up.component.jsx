@@ -18,6 +18,7 @@ const defaultFormFields = {
 const SignUp = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { username, email, password, confirmPassword } = formFields;
+
   //console.log(formFields);
   const navigate = useNavigate();
 
