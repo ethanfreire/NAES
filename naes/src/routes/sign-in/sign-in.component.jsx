@@ -5,13 +5,17 @@ import {
 } from "../../utils/firebase/firebase.utils";
 import "../sign-in/sign-in.styles.scss";
 import Button from "../../components/button/button.component";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../contexts/user.context";
 import FormInput from "../../components/form-input/form-input.component";
 const SignIn = () => {
   const signInWithGoogle = async () => {
     const { user } = await signInWithGooglePopup();
+    setCurrentUser(user);
     await createUserDocumentFromAuth(user);
     console.log("You've successfully sign in with google popup");
+    navigateToHomePage();
   };
 
   const defaultFormFields = {
@@ -20,8 +24,17 @@ const SignIn = () => {
   };
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
-  console.log(formFields);
+  //console.log(formFields);
 
+  const { setCurrentUser } = useContext(UserContext);
+  const navigate = useNavigate();
+  const navigateToSignUp = () => {
+    navigate("/sign-up")
+  };
+
+  const navigateToHomePage = () => {
+    navigate("/")
+  };
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormFields({ ...formFields, [name]: value });
@@ -31,16 +44,21 @@ const SignIn = () => {
     setFormFields(defaultFormFields);
   };
 
+  
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      const response = await signInAuthUserWithEmailAndPassword(
+      const { user } = await signInAuthUserWithEmailAndPassword(
         email,
         password
       );
-      console.log(response);
+      console.log(user);
+      //useState Hooks causes re-rendering
+      setCurrentUser(user);
       resetFormFields();
+      navigateToHomePage();
     } catch (error) {
       switch (error.code) {
         case "auth/wrong-password":
@@ -84,11 +102,18 @@ const SignIn = () => {
         />
         <div className="buttons-container">
           <Button type="submit">Sign In</Button>
-          <Button type="button" buttonVariety="google" onClick={signInWithGoogle}>
+          <Button
+            type="button"
+            buttonVariety="google"
+            onClick={signInWithGoogle}
+          >
             Google Sign In
           </Button>
         </div>
       </form>
+      <h3> If you want to be redirected to sign up page please click </h3>
+      <Button buttonVariety="inverted" onClick={navigateToSignUp}>Sign Up</Button>
+     
     </div>
   );
 };

@@ -1,6 +1,9 @@
 import FormInput from "../../components/form-input/form-input.component";
-import "../sign-up/sign-up.styles.scss"
-import { useState } from "react";
+import "../sign-up/sign-up.styles.scss";
+import { useState, useContext } from "react";
+import { UserContext } from "../../contexts/user.context";
+import { useNavigate } from "react-router-dom";
+
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
@@ -16,8 +19,15 @@ const defaultFormFields = {
 const SignUp = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { username, email, password, confirmPassword } = formFields;
-  console.log(formFields);
-
+  const{setCurrentUser} =useContext(UserContext);
+  //console.log(formFields);
+  const navigate = useNavigate();
+  const navigateToSignIn = () => {
+    navigate("/sign-in")
+  };
+  const navigateToHomePage = () => {
+    navigate("/")
+  };
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormFields({ ...formFields, [name]: value });
@@ -40,12 +50,11 @@ const SignUp = () => {
         email,
         password
       );
-
-      const userDocSignUp = await createUserDocumentFromAuth(user, {
-        username,
-      });
+      setCurrentUser(user);
+      await createUserDocumentFromAuth(user, {username});
 
       resetFormFields();
+      navigateToHomePage();
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
         alert(
@@ -61,7 +70,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className='sign-up-container'>
+    <div className="sign-up-container">
       <h2>Don't have an account?</h2>
       <span>Sign up with your email and password</span>
 
@@ -110,8 +119,12 @@ const SignUp = () => {
           }}
         />
 
-        <Button className="button-container" type="submit">Sign Up</Button>
+        <Button className="button-container" type="submit">
+          Sign Up
+        </Button>
       </form>
+      <h3> If you want to be redirected to sign in page please click </h3>
+      <Button buttonVariety="inverted" onClick={navigateToSignIn}>Sign In</Button>
     </div>
   );
 };

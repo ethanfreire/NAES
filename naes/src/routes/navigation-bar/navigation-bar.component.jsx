@@ -1,9 +1,18 @@
 import { Outlet, Link } from "react-router-dom";
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
 import { ReactComponent as NaesLogo } from "../../assets/naes web logo.svg";
 import "./navigation-bar.styles.scss";
-
+import { UserContext } from "../../contexts/user.context";
+import { signOutUser } from "../../utils/firebase/firebase.utils";
 const NavigationBar = () => {
+  const { currentUser,setCurrentUser } = useContext(UserContext);
+  
+  const signOutHandler = async() => {
+    const response = await signOutUser();
+    setCurrentUser(null);
+    console.log("you've successfully signed out user.")
+  };
+
   return (
     <Fragment>
       <div className="navigation">
@@ -14,12 +23,16 @@ const NavigationBar = () => {
           <Link className="nav-link" to="/shop">
             Shop
           </Link>
-          <Link className="nav-link" to="/sign-in">
-            Sign In
-          </Link>
-          <Link className="nav-link" to="/sign-up">
+          {currentUser ? (
+            <span className="nav-link" onClick={signOutHandler}>Sign Out</span>
+          ) : (
+            <Link className="nav-link" to="/sign-in">
+              Sign In
+            </Link>
+          )}
+          {currentUser ? null : (<Link className="nav-link" to="/sign-up">
             Sign Up
-          </Link>
+          </Link>) }
         </div>
       </div>
       <Outlet></Outlet>
