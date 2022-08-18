@@ -1,14 +1,13 @@
 import FormInput from "../../components/form-input/form-input.component";
 import "../sign-up/sign-up.styles.scss";
-import { useState, useContext } from "react";
-import { UserContext } from "../../contexts/user.context";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
 } from "../../utils/firebase/firebase.utils";
 import Button from "../../components/button/button.component";
+
 const defaultFormFields = {
   username: "",
   email: "",
@@ -19,14 +18,14 @@ const defaultFormFields = {
 const SignUp = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { username, email, password, confirmPassword } = formFields;
-  const{setCurrentUser} =useContext(UserContext);
   //console.log(formFields);
   const navigate = useNavigate();
+
   const navigateToSignIn = () => {
-    navigate("/sign-in")
+    navigate("/sign-in");
   };
   const navigateToHomePage = () => {
-    navigate("/")
+    navigate("/");
   };
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -50,8 +49,7 @@ const SignUp = () => {
         email,
         password
       );
-      setCurrentUser(user);
-      await createUserDocumentFromAuth(user, {username});
+      await createUserDocumentFromAuth(user, { username });
 
       resetFormFields();
       navigateToHomePage();
@@ -124,7 +122,9 @@ const SignUp = () => {
         </Button>
       </form>
       <h3> If you want to be redirected to sign in page please click </h3>
-      <Button buttonVariety="inverted" onClick={navigateToSignIn}>Sign In</Button>
+      <Button buttonVariety="inverted" onClick={navigateToSignIn}>
+        Sign In
+      </Button>
     </div>
   );
 };

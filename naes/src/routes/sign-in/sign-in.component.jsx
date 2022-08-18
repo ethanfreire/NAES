@@ -5,19 +5,10 @@ import {
 } from "../../utils/firebase/firebase.utils";
 import "../sign-in/sign-in.styles.scss";
 import Button from "../../components/button/button.component";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../../contexts/user.context";
 import FormInput from "../../components/form-input/form-input.component";
 const SignIn = () => {
-  const signInWithGoogle = async () => {
-    const { user } = await signInWithGooglePopup();
-    setCurrentUser(user);
-    await createUserDocumentFromAuth(user);
-    console.log("You've successfully sign in with google popup");
-    navigateToHomePage();
-  };
-
   const defaultFormFields = {
     email: "",
     password: "",
@@ -26,14 +17,21 @@ const SignIn = () => {
   const { email, password } = formFields;
   //console.log(formFields);
 
-  const { setCurrentUser } = useContext(UserContext);
   const navigate = useNavigate();
+
+  const signInWithGoogle = async () => {
+    const { user } = await signInWithGooglePopup();
+    await createUserDocumentFromAuth(user);
+    console.log("You've successfully sign in with google popup");
+    navigateToHomePage();
+  };
+
   const navigateToSignUp = () => {
-    navigate("/sign-up")
+    navigate("/sign-up");
   };
 
   const navigateToHomePage = () => {
-    navigate("/")
+    navigate("/");
   };
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -43,8 +41,6 @@ const SignIn = () => {
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
   };
-
-  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -56,7 +52,6 @@ const SignIn = () => {
       );
       console.log(user);
       //useState Hooks causes re-rendering
-      setCurrentUser(user);
       resetFormFields();
       navigateToHomePage();
     } catch (error) {
@@ -112,8 +107,9 @@ const SignIn = () => {
         </div>
       </form>
       <h3> If you want to be redirected to sign up page please click </h3>
-      <Button buttonVariety="inverted" onClick={navigateToSignUp}>Sign Up</Button>
-     
+      <Button buttonVariety="inverted" onClick={navigateToSignUp}>
+        Sign Up
+      </Button>
     </div>
   );
 };
