@@ -3,7 +3,7 @@ import {
   signInAuthUserWithEmailAndPassword,
 } from "../../utils/firebase/firebase.utils";
 import "../sign-in/sign-in.styles.scss";
-import Button from "../../components/button/button.component";
+import Button, {buttonVarietyClasses} from "../../components/button/button.component.jsx";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FormInput from "../../components/form-input/form-input.component";
@@ -43,7 +43,7 @@ const SignIn = () => {
     event.preventDefault();
 
     try {
-      const { user } = await signInAuthUserWithEmailAndPassword(
+       await signInAuthUserWithEmailAndPassword(
         email,
         password
       );
@@ -95,7 +95,7 @@ const SignIn = () => {
           <Button type="submit">Sign In</Button>
           <Button
             type="button"
-            buttonVariety="google"
+            buttonVariety={buttonVarietyClasses.google}
             onClick={signInWithGoogle}
           >
             Google Sign In
