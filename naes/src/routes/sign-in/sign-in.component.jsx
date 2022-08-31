@@ -92,7 +92,7 @@ const SignIn = () => {
           }}
         />
         <div className="buttons-container">
-          <Button type="submit">Sign In</Button>
+          <Button buttonVariety={buttonVarietyClasses.base} type="submit">Sign In</Button>
           <Button
             type="button"
             buttonVariety={buttonVarietyClasses.google}
@@ -103,7 +103,7 @@ const SignIn = () => {
         </div>
       </form>
       <h3> If you want to be redirected to sign up page please click </h3>
-      <Button buttonVariety="inverted" onClick={navigateToSignUp}>
+      <Button buttonVariety={buttonVarietyClasses.inverted} onClick={navigateToSignUp}>
         Sign Up
       </Button>
     </div>

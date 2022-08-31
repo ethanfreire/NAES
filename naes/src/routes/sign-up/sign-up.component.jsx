@@ -6,7 +6,7 @@ import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
 } from "../../utils/firebase/firebase.utils";
-import Button from "../../components/button/button.component";
+import Button, {buttonVarietyClasses} from "../../components/button/button.component.jsx";
 
 const defaultFormFields = {
   username: "",
@@ -118,12 +118,12 @@ const SignUp = () => {
           }}
         />
 
-        <Button className="button-container" type="submit">
+        <Button buttonVariety={buttonVarietyClasses.base}  className="button-container" type="submit">
           Sign Up
         </Button>
       </form>
       <h3> If you want to be redirected to sign in page please click </h3>
-      <Button buttonVariety="inverted" onClick={navigateToSignIn}>
+      <Button buttonVariety={buttonVarietyClasses.inverted} onClick={navigateToSignIn}>
         Sign In
       </Button>
     </div>
