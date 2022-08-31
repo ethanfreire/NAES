@@ -13,22 +13,18 @@ export const CheckoutItemContainer = styled.div`
 export const ImageContainer = styled.div`
   width: 23%;
   padding-right: 0.9375em;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
-export const Img = styled.img`
-  width: 100%;
-  height: 100%;
-`;
-
-export const Name = styled.span``;
-
-export const Quantity = styled.span``;
-
-export const Price = styled.div`
+export const BaseSpan = styled.span`
   width: 30%;
 `;
 
-export const Quantity2 = styled.span`
+export const Quantity = styled(BaseSpan)`
   display: flex;
 `;
 
@@ -38,7 +34,6 @@ export const Arrow = styled.div`
 
 export const Value = styled.span`
   margin: 0 0.625em;
-  
 `;
 
 export const RemoveButton = styled.div`
