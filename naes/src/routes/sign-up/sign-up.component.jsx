@@ -1,12 +1,14 @@
 import FormInput from "../../components/form-input/form-input.component";
-import "../sign-up/sign-up.styles.scss";
+import { SignUpContainer } from "./sign-up.styles.jsx";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
 } from "../../utils/firebase/firebase.utils";
-import Button, {buttonVarietyClasses} from "../../components/button/button.component.jsx";
+import Button, {
+  buttonVarietyClasses,
+} from "../../components/button/button.component.jsx";
 
 const defaultFormFields = {
   username: "",
@@ -69,7 +71,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="sign-up-container">
+    <SignUpContainer>
       <h2>Don't have an account?</h2>
       <span>Sign up with your email and password</span>
 
@@ -118,15 +120,21 @@ const SignUp = () => {
           }}
         />
 
-        <Button buttonVariety={buttonVarietyClasses.base}  className="button-container" type="submit">
+        <Button
+          buttonVariety={buttonVarietyClasses.base}
+          type="submit"
+        >
           Sign Up
         </Button>
       </form>
       <h3> If you want to be redirected to sign in page please click </h3>
-      <Button buttonVariety={buttonVarietyClasses.inverted} onClick={navigateToSignIn}>
+      <Button
+        buttonVariety={buttonVarietyClasses.inverted}
+        onClick={navigateToSignIn}
+      >
         Sign In
       </Button>
-    </div>
+    </SignUpContainer>
   );
 };
 export default SignUp;

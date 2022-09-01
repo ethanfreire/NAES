@@ -2,7 +2,7 @@ import {
   signInWithGooglePopup,
   signInAuthUserWithEmailAndPassword,
 } from "../../utils/firebase/firebase.utils";
-import "../sign-in/sign-in.styles.scss";
+import {SignInContainer,ButtonsContainer} from "./sign-in.styles.jsx";
 import Button, {buttonVarietyClasses} from "../../components/button/button.component.jsx";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -65,7 +65,7 @@ const SignIn = () => {
   };
 
   return (
-    <div className="sign-in-container">
+    <SignInContainer>
       <h2>Already have an account?</h2>
       <span>Sign In with your email and password</span>
 
@@ -91,7 +91,7 @@ const SignIn = () => {
             value: password,
           }}
         />
-        <div className="buttons-container">
+        <ButtonsContainer>
           <Button buttonVariety={buttonVarietyClasses.base} type="submit">Sign In</Button>
           <Button
             type="button"
@@ -100,13 +100,13 @@ const SignIn = () => {
           >
             Google Sign In
           </Button>
-        </div>
+        </ButtonsContainer>
       </form>
       <h3> If you want to be redirected to sign up page please click </h3>
       <Button buttonVariety={buttonVarietyClasses.inverted} onClick={navigateToSignUp}>
         Sign Up
       </Button>
-    </div>
+    </SignInContainer>
   );
 };
 export default SignIn;
