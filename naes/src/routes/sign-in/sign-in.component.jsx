@@ -7,6 +7,8 @@ import Button, {buttonVarietyClasses} from "../../components/button/button.compo
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FormInput from "../../components/form-input/form-input.component";
+
+
 const SignIn = () => {
   const defaultFormFields = {
     email: "",
@@ -22,6 +24,7 @@ const SignIn = () => {
     console.log("You've successfully sign in with google popup");
     navigateToHomePage();
   };
+
 
   const navigateToSignUp = () => {
     navigate("/sign-up");

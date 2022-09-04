@@ -8,9 +8,9 @@ import { createAction } from "../utils/reducer/reducer.utils";
 export const UserContext = createContext({
   currentUser: null,
   setCurrentUser: () => null,
-});
+}); 
 
-const USER_ACTION_TYPES = {
+export const USER_ACTION_TYPES = {
   SET_CURRENT_USER: "SET_CURRENT_USER",
 };
 
@@ -42,6 +42,7 @@ export const UserProvider = ({ children }) => {
   const value = { currentUser, setCurrentUser };
 
   useEffect(() => {
+    console.log("im in user context js");
     const unsubscribe = onAuthStateChangedListener((user) => {
       if (user) {
         createUserDocumentFromAuth(user);

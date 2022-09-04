@@ -7,6 +7,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
+  updateProfile
 } from "firebase/auth";
 import {
   getFirestore,
@@ -77,8 +78,9 @@ export const getCategoriesAndDocuments = async () => {
 
 export const createUserDocumentFromAuth = async (
   userAuth,
-  additionalInfo = {}
+  additionalInfo={}
 ) => {
+  
   if (!userAuth) return;
   const userDocsRef = doc(db, "users", userAuth.uid);
 
@@ -87,17 +89,15 @@ export const createUserDocumentFromAuth = async (
   const userSnapshot = await getDoc(userDocsRef);
   console.log(userSnapshot);
   console.log("checking if user Already exist in db: " + userSnapshot.exists());
-
   //if user does not exist
   if (!userSnapshot.exists()) {
     const { displayName, email } = userAuth;
     const createdAt = new Date();
-    const username = displayName;
     try {
       //create new user
-
+      
       await setDoc(userDocsRef, {
-        username,
+        displayName,
         email,
         createdAt,
         ...additionalInfo,
@@ -106,8 +106,15 @@ export const createUserDocumentFromAuth = async (
       console.log("error creating user ", error.message);
     }
   }
-
+ 
   return userDocsRef;
+};
+
+export const updateCurrentUserDisplayName = ( newDisplayName) => {
+  console.log("your in update display call");
+
+  return updateProfile(auth.currentUser, {displayName: newDisplayName});
+  
 };
 
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
