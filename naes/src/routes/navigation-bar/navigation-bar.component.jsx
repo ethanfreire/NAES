@@ -13,26 +13,25 @@ import { CartContext } from "../../contexts/cart.context";
 import { signOutUser } from "../../utils/firebase/firebase.utils";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import {  updateUserName } from "../../store/user/user.action"  
-
+import { updateUserName } from "../../store/user/user.action";
+import {
+  selectCurrentUser,
+  selectUserName,
+} from "../../store/user/user.selector";
 const NavigationBar = () => {
+  const currentUser = useSelector(selectCurrentUser);
+
+  const userName = useSelector(selectUserName);
 
   const dispatch = useDispatch();
-
-  const currentUser = useSelector((state) => {
-    return state.user.currentUser;
-  });
-  const userName = useSelector((state) => {
-    return state.user.userName;
-  });
 
   const { isCartOpen } = useContext(CartContext);
 
   const signOutComplete = () => {
     signOutUser();
-    
     dispatch(updateUserName(null));
   };
+
   return (
     <Fragment>
       <NavigationContainer>

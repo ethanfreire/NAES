@@ -61,10 +61,12 @@ const SignUp = () => {
       };
 
       await createUserDocumentFromAuth(user, display);
+      
       resetFormFields();
       updateCurrentUserDisplayName(display.displayName);
       dispatch(updateUserName(display.displayName));
       navigateToHomePage();
+
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
         alert(
