@@ -43,14 +43,14 @@ const NavigationBar = () => {
             <NavLink to="/">Hello, {userName}</NavLink>
           ) : null}
           <NavLink to="/shop">Shop</NavLink>
-          {currentUser ? (
+          {userName !== null ? (
             <NavLink as="span" onClick={signOutComplete}>
               Sign Out
             </NavLink>
           ) : (
             <NavLink to="/sign-in">Sign In</NavLink>
           )}
-          {currentUser ? null : <NavLink to="/sign-up">Sign Up</NavLink>}
+          {userName === null ? <NavLink to="/sign-up">Sign Up</NavLink> : null }
 
           <CartIcon></CartIcon>
         </NavLinksContainer>

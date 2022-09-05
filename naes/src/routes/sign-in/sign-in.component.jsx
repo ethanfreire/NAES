@@ -2,8 +2,10 @@ import {
   signInWithGooglePopup,
   signInAuthUserWithEmailAndPassword,
 } from "../../utils/firebase/firebase.utils";
-import {SignInContainer,ButtonsContainer} from "./sign-in.styles.jsx";
-import Button, {buttonVarietyClasses} from "../../components/button/button.component.jsx";
+import { SignInContainer, ButtonsContainer } from "./sign-in.styles.jsx";
+import Button, {
+  buttonVarietyClasses,
+} from "../../components/button/button.component.jsx";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FormInput from "../../components/form-input/form-input.component";
@@ -25,7 +27,6 @@ const SignIn = () => {
     navigateToHomePage();
   };
 
-
   const navigateToSignUp = () => {
     navigate("/sign-up");
   };
@@ -46,11 +47,9 @@ const SignIn = () => {
     event.preventDefault();
 
     try {
-       await signInAuthUserWithEmailAndPassword(
-        email,
-        password
-      );
+      await signInAuthUserWithEmailAndPassword(email, password);
       //useState Hooks causes re-rendering
+      console.log("You've successfully sign in");
       resetFormFields();
       navigateToHomePage();
     } catch (error) {
@@ -95,7 +94,9 @@ const SignIn = () => {
           }}
         />
         <ButtonsContainer>
-          <Button buttonVariety={buttonVarietyClasses.base} type="submit">Sign In</Button>
+          <Button buttonVariety={buttonVarietyClasses.base} type="submit">
+            Sign In
+          </Button>
           <Button
             type="button"
             buttonVariety={buttonVarietyClasses.google}
@@ -106,7 +107,10 @@ const SignIn = () => {
         </ButtonsContainer>
       </form>
       <h3> If you want to be redirected to sign up page please click </h3>
-      <Button buttonVariety={buttonVarietyClasses.inverted} onClick={navigateToSignUp}>
+      <Button
+        buttonVariety={buttonVarietyClasses.inverted}
+        onClick={navigateToSignUp}
+      >
         Sign Up
       </Button>
     </SignInContainer>

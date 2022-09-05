@@ -56,15 +56,15 @@ const SignUp = () => {
         password
       );
       console.log("display name on submit is " + event.target[0].value);
-      const display = {
+      const displayName = {
         displayName: event.target[0].value,
       };
 
-      await createUserDocumentFromAuth(user, display);
+      await createUserDocumentFromAuth(user, displayName);
       
       resetFormFields();
-      updateCurrentUserDisplayName(display.displayName);
-      dispatch(updateUserName(display.displayName));
+      updateCurrentUserDisplayName(displayName['displayName']);
+      dispatch(updateUserName(displayName['displayName']));
       navigateToHomePage();
 
     } catch (error) {
