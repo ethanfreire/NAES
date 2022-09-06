@@ -13,6 +13,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentUser, updateUserName } from "./store/user/user.action";
 import { selectCurrentUser } from "./store/user/user.selector";
+
 const App = () => {
   const dispatch = useDispatch();
   const currentUser = useSelector(selectCurrentUser);
