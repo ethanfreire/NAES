@@ -1,17 +1,33 @@
-import {ProductCardContainer,Footer,Name,Price}from "./product-card.styles.jsx";
-import Button, {buttonVarietyClasses} from "../../components/button/button.component.jsx";
-import { useContext } from "react";
-import { CartContext } from "../../contexts/cart.context";
+import {
+  ProductCardContainer,
+  Footer,
+  Name,
+  Price,
+} from "./product-card.styles.jsx";
+import Button, {
+  buttonVarietyClasses,
+} from "../../components/button/button.component.jsx";
+import { addItemToCart } from "../../store/cart/cart.action.js";
+import { useDispatch, useSelector } from "react-redux";
+import { selectCartItems } from "../../store/cart/cart.selector.js";
 
 const ProductCard = ({ product }) => {
   const { name, imageUrl, price } = product;
-  const { addItemsToCart } = useContext(CartContext);
-  const addProductToCart = () => addItemsToCart(product);
+  const dispatch = useDispatch();
+  const cartItems = useSelector(selectCartItems);
+
+  const addProductToCart = () => {
+    return dispatch(addItemToCart(cartItems, product));
+  };
+
   return (
     <ProductCardContainer>
       <img src={imageUrl} alt={`${name}`}></img>
 
-      <Button buttonVariety={buttonVarietyClasses.inverted} onClick={addProductToCart}>
+      <Button
+        buttonVariety={buttonVarietyClasses.inverted}
+        onClick={addProductToCart}
+      >
         Add to Cart
       </Button>
 

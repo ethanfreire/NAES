@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import { Fragment, useContext } from "react";
+import { Fragment } from "react";
 import { ReactComponent as NaesLogo } from "../../assets/naes web logo.svg";
 import {
   NavigationContainer,
@@ -9,7 +9,6 @@ import {
 } from "./navigation-bar.styles";
 import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
-import { CartContext } from "../../contexts/cart.context";
 import { signOutUser } from "../../utils/firebase/firebase.utils";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -18,6 +17,8 @@ import {
   selectCurrentUser,
   selectUserName,
 } from "../../store/user/user.selector";
+import {selectIsCartOpen} from "../../store/cart/cart.selector"
+
 const NavigationBar = () => {
   const currentUser = useSelector(selectCurrentUser);
 
@@ -25,7 +26,7 @@ const NavigationBar = () => {
 
   const dispatch = useDispatch();
 
-  const { isCartOpen } = useContext(CartContext);
+  const isCartOpen = useSelector(selectIsCartOpen)
 
   const signOutComplete = () => {
     signOutUser();
