@@ -2,16 +2,12 @@ import FormInput from "../../components/form-input/form-input.component";
 import { SignUpContainer } from "./sign-up.styles.jsx";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  createAuthUserWithEmailAndPassword,
-  createUserDocumentFromAuth,
-  updateCurrentUserDisplayName,
-} from "../../utils/firebase/firebase.utils";
+
 import Button, {
   buttonVarietyClasses,
 } from "../../components/button/button.component.jsx";
 import { useDispatch } from "react-redux";
-import { updateUserName } from "../../store/user/user.action";
+import { updateUserName,signUpStart } from "../../store/user/user.action";
 const defaultFormFields = {
   displayName: "",
   email: "",
@@ -51,20 +47,9 @@ const SignUp = () => {
     }
 
     try {
-      const { user } = await createAuthUserWithEmailAndPassword(
-        email,
-        password
-      );
-      console.log("display name on submit is " + event.target[0].value);
-      const displayName = {
-        displayName: event.target[0].value,
-      };
-
-      await createUserDocumentFromAuth(user, displayName);
-      
+      dispatch(signUpStart(email,password,displayName))
       resetFormFields();
-      updateCurrentUserDisplayName(displayName['displayName']);
-      dispatch(updateUserName(displayName['displayName']));
+      dispatch(updateUserName(displayName));
       navigateToHomePage();
 
     } catch (error) {

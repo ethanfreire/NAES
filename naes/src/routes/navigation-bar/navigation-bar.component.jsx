@@ -52,7 +52,7 @@ const NavigationBar = () => {
             <NavLink to="/sign-in">Sign In</NavLink>
           )}
           {userName === null ? <NavLink to="/sign-up">Sign Up</NavLink> : null }
-
+         
           <CartIcon></CartIcon>
         </NavLinksContainer>
         {isCartOpen && <CartDropdown></CartDropdown>}

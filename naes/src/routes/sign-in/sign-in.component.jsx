@@ -1,7 +1,4 @@
-import {
-  signInWithGooglePopup,
-  signInAuthUserWithEmailAndPassword,
-} from "../../utils/firebase/firebase.utils";
+
 import { SignInContainer, ButtonsContainer } from "./sign-in.styles.jsx";
 import Button, {
   buttonVarietyClasses,
@@ -9,23 +6,26 @@ import Button, {
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FormInput from "../../components/form-input/form-input.component";
-
+import { useDispatch } from "react-redux";
+import {googleSignInStart,emailSignInStart} from '../../store/user/user.action'
 
 const SignIn = () => {
   const defaultFormFields = {
     email: "",
     password: "",
   };
+
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
 
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const signInWithGoogle = async () => {
-    await signInWithGooglePopup();
-    console.log("You've successfully sign in with google popup");
-    navigateToHomePage();
+    dispatch(googleSignInStart());
+    console.log("You've successfully Google sign in");
   };
+ 
 
   const navigateToSignUp = () => {
     navigate("/sign-up");
@@ -47,7 +47,8 @@ const SignIn = () => {
     event.preventDefault();
 
     try {
-      await signInAuthUserWithEmailAndPassword(email, password);
+      
+      dispatch(emailSignInStart(email,password));
       //useState Hooks causes re-rendering
       console.log("You've successfully sign in");
       resetFormFields();

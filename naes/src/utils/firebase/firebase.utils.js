@@ -1,4 +1,5 @@
 import { initializeApp } from "firebase/app";
+
 import {
   getAuth,
   signInWithPopup,
@@ -7,8 +8,9 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
-  updateProfile
+  updateProfile,
 } from "firebase/auth";
+
 import {
   getFirestore,
   getDoc,
@@ -64,20 +66,18 @@ export const addCollectionAndDocuments = async (
 export const getCategoriesAndDocuments = async () => {
   const collectionRef = collection(db, "categories");
   const queryCollection = query(collectionRef);
-  
+
   const querySnapshot = await getDocs(queryCollection);
 
-return querySnapshot.docs.map((docSnapshot) => {
-  return(docSnapshot.data())
-}); 
-  
+  return querySnapshot.docs.map((docSnapshot) => {
+    return docSnapshot.data();
+  });
 };
 
 export const createUserDocumentFromAuth = async (
   userAuth,
-  additionalInfo={}
+  additionalInfo = {}
 ) => {
-  
   if (!userAuth) return;
   const userDocsRef = doc(db, "users", userAuth.uid);
 
@@ -86,13 +86,14 @@ export const createUserDocumentFromAuth = async (
   const userSnapshot = await getDoc(userDocsRef);
   console.log(userSnapshot);
   console.log("checking if user Already exist in db: " + userSnapshot.exists());
+
   //if user does not exist
   if (!userSnapshot.exists()) {
     const { displayName, email } = userAuth;
     const createdAt = new Date();
     try {
       //create new user
-      
+
       await setDoc(userDocsRef, {
         displayName,
         email,
@@ -103,15 +104,15 @@ export const createUserDocumentFromAuth = async (
       console.log("error creating user ", error.message);
     }
   }
- 
-  return userDocsRef;
+
+  return userSnapshot;
 };
 
-export const updateCurrentUserDisplayName = ( newDisplayName) => {
+export const updateCurrentUserDisplayName = (user,newDisplayName) => {
   console.log("your in update display call");
-
-  return updateProfile(auth.currentUser, {displayName: newDisplayName});
   
+
+  return updateProfile(user, { displayName: newDisplayName });
 };
 
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
@@ -130,3 +131,16 @@ export const signOutUser = async () => await signOut(auth);
 
 export const onAuthStateChangedListener = (callback) =>
   onAuthStateChanged(auth, callback);
+
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      (userAuth) => {
+        unsubscribe();
+        resolve(userAuth);
+      },
+      reject
+    );
+  });
+};
