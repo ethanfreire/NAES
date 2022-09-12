@@ -9,15 +9,13 @@ import {
 } from "./navigation-bar.styles";
 import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
-import { signOutUser } from "../../utils/firebase/firebase.utils";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { updateUserName } from "../../store/user/user.action";
+import { useSelector, useDispatch } from "react-redux";
+import { updateUserName, signOutStart } from "../../store/user/user.action";
 import {
   selectCurrentUser,
   selectUserName,
 } from "../../store/user/user.selector";
-import {selectIsCartOpen} from "../../store/cart/cart.selector"
+import { selectIsCartOpen } from "../../store/cart/cart.selector";
 
 const NavigationBar = () => {
   const currentUser = useSelector(selectCurrentUser);
@@ -26,10 +24,10 @@ const NavigationBar = () => {
 
   const dispatch = useDispatch();
 
-  const isCartOpen = useSelector(selectIsCartOpen)
+  const isCartOpen = useSelector(selectIsCartOpen);
 
   const signOutComplete = () => {
-    signOutUser();
+    dispatch(signOutStart());
     dispatch(updateUserName(null));
   };
 
@@ -51,8 +49,8 @@ const NavigationBar = () => {
           ) : (
             <NavLink to="/sign-in">Sign In</NavLink>
           )}
-          {userName === null ? <NavLink to="/sign-up">Sign Up</NavLink> : null }
-         
+          {userName === null ? <NavLink to="/sign-up">Sign Up</NavLink> : null}
+
           <CartIcon></CartIcon>
         </NavLinksContainer>
         {isCartOpen && <CartDropdown></CartDropdown>}

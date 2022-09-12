@@ -3,8 +3,8 @@ import { USER_ACTION_TYPES } from "./user.types";
 const INITIAL_STATE = {
   currentUser: null,
   userName: null,
-  isLoading:false,
-  error:null,
+  isLoading: false,
+  error: null,
 };
 
 export const userReducer = (state = INITIAL_STATE, action) => {
@@ -16,17 +16,37 @@ export const userReducer = (state = INITIAL_STATE, action) => {
         ...state,
         currentUser: payload,
       };
-      case USER_ACTION_TYPES.SIGN_IN_FAILED:
-        return{
-          ...state,
-          error: payload
-        };
 
-      case USER_ACTION_TYPES.UPDATE_USERNAME:
+    case USER_ACTION_TYPES.SIGN_OUT_SUCCESS:
+      return {
+        ...state,
+        currentUser: null,
+      };
+
+    case USER_ACTION_TYPES.UPDATE_USERNAME:
       return {
         ...state,
         userName: payload,
       };
+
+    case USER_ACTION_TYPES.SIGN_IN_FAILED:
+      return {
+        ...state,
+        error: payload,
+      };
+
+    case USER_ACTION_TYPES.SIGN_UP_FAILED:
+      return {
+        ...state,
+        error: payload,
+      };
+
+    case USER_ACTION_TYPES.SIGN_OUT_FAILED:
+      return {
+        ...state,
+        error: payload,
+      };
+
     default:
       return state;
   }
