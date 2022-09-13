@@ -2,16 +2,14 @@ import FormInput from "../../components/form-input/form-input.component";
 import { SignUpContainer } from "./sign-up.styles.jsx";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  createAuthUserWithEmailAndPassword,
-  createUserDocumentFromAuth,
-} from "../../utils/firebase/firebase.utils";
+
 import Button, {
   buttonVarietyClasses,
 } from "../../components/button/button.component.jsx";
-
+import { useDispatch } from "react-redux";
+import { updateUserName,signUpStart } from "../../store/user/user.action";
 const defaultFormFields = {
-  username: "",
+  displayName: "",
   email: "",
   password: "",
   confirmPassword: "",
@@ -19,17 +17,18 @@ const defaultFormFields = {
 
 const SignUp = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
-  const { username, email, password, confirmPassword } = formFields;
+  const { displayName, email, password, confirmPassword } = formFields;
 
-  //console.log(formFields);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const navigateToSignIn = () => {
     navigate("/sign-in");
   };
   const navigateToHomePage = () => {
-    navigate("/");
+    navigate("/", { replace: true });
   };
+  
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormFields({ ...formFields, [name]: value });
@@ -48,14 +47,11 @@ const SignUp = () => {
     }
 
     try {
-      const { user } = await createAuthUserWithEmailAndPassword(
-        email,
-        password
-      );
-      await createUserDocumentFromAuth(user, { username });
-
+      dispatch(signUpStart(email,password,displayName))
       resetFormFields();
+      dispatch(updateUserName(displayName));
       navigateToHomePage();
+
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
         alert(
@@ -77,13 +73,13 @@ const SignUp = () => {
 
       <form action="" onSubmit={handleSubmit}>
         <FormInput
-          label="Username"
+          label="Display Name"
           inputOptions={{
             type: "text",
             required: true,
             onChange: handleChange,
-            name: "username",
-            value: username,
+            name: "displayName",
+            value: displayName,
           }}
         />
 
@@ -120,10 +116,7 @@ const SignUp = () => {
           }}
         />
 
-        <Button
-          buttonVariety={buttonVarietyClasses.base}
-          type="submit"
-        >
+        <Button buttonVariety={buttonVarietyClasses.base} type="submit">
           Sign Up
         </Button>
       </form>

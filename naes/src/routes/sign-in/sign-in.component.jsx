@@ -1,27 +1,30 @@
-import {
-  signInWithGooglePopup,
-  signInAuthUserWithEmailAndPassword,
-} from "../../utils/firebase/firebase.utils";
-import {SignInContainer,ButtonsContainer} from "./sign-in.styles.jsx";
-import Button, {buttonVarietyClasses} from "../../components/button/button.component.jsx";
+
+import { SignInContainer, ButtonsContainer } from "./sign-in.styles.jsx";
+import Button, {
+  buttonVarietyClasses,
+} from "../../components/button/button.component.jsx";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FormInput from "../../components/form-input/form-input.component";
+import { useDispatch } from "react-redux";
+import {googleSignInStart,emailSignInStart} from '../../store/user/user.action'
+
 const SignIn = () => {
   const defaultFormFields = {
     email: "",
     password: "",
   };
+
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
 
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const signInWithGoogle = async () => {
-    await signInWithGooglePopup();
-    console.log("You've successfully sign in with google popup");
-    navigateToHomePage();
+    dispatch(googleSignInStart());
   };
+ 
 
   const navigateToSignUp = () => {
     navigate("/sign-up");
@@ -43,10 +46,8 @@ const SignIn = () => {
     event.preventDefault();
 
     try {
-       await signInAuthUserWithEmailAndPassword(
-        email,
-        password
-      );
+      
+      dispatch(emailSignInStart(email,password));
       //useState Hooks causes re-rendering
       resetFormFields();
       navigateToHomePage();
@@ -92,7 +93,9 @@ const SignIn = () => {
           }}
         />
         <ButtonsContainer>
-          <Button buttonVariety={buttonVarietyClasses.base} type="submit">Sign In</Button>
+          <Button buttonVariety={buttonVarietyClasses.base} type="submit">
+            Sign In
+          </Button>
           <Button
             type="button"
             buttonVariety={buttonVarietyClasses.google}
@@ -103,7 +106,10 @@ const SignIn = () => {
         </ButtonsContainer>
       </form>
       <h3> If you want to be redirected to sign up page please click </h3>
-      <Button buttonVariety={buttonVarietyClasses.inverted} onClick={navigateToSignUp}>
+      <Button
+        buttonVariety={buttonVarietyClasses.inverted}
+        onClick={navigateToSignUp}
+      >
         Sign Up
       </Button>
     </SignInContainer>
