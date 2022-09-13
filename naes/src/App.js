@@ -5,26 +5,16 @@ import SignIn from "./routes/sign-in/sign-in.component";
 import SignUp from "./routes/sign-up/sign-up.component";
 import Shop from "./routes/shop/shop.component";
 import Checkout from "./routes/checkout/checkout.component";
-
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {  updateUserName,checkUserSession } from "./store/user/user.action";
-import { selectCurrentUser } from "./store/user/user.selector";
+import { useDispatch } from "react-redux";
+import {  checkUserSession } from "./store/user/user.action";
 
 const App = () => {
   const dispatch = useDispatch();
-  const currentUser = useSelector(selectCurrentUser);
 
   useEffect(() => {
     dispatch(checkUserSession());
   }, []);
-
-  //on app refresh
-  // useEffect(() => {
-  //   if (currentUser !== null) {
-  //     dispatch(updateUserName(currentUser.displayName))
-  //   }
-  // }, [currentUser]);
 
   return (
     <Routes>

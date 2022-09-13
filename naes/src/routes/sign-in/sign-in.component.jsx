@@ -23,7 +23,6 @@ const SignIn = () => {
 
   const signInWithGoogle = async () => {
     dispatch(googleSignInStart());
-    console.log("You've successfully Google sign in");
   };
  
 
@@ -50,7 +49,6 @@ const SignIn = () => {
       
       dispatch(emailSignInStart(email,password));
       //useState Hooks causes re-rendering
-      console.log("You've successfully sign in");
       resetFormFields();
       navigateToHomePage();
     } catch (error) {

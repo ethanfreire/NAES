@@ -7,3 +7,6 @@ export const selectUserName = (state) => {
     return state.user.userName;
   };
 
+  export const selectIsLoading = (state) => {
+    return state.user.isLoading;
+  };

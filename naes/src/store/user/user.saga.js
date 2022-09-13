@@ -30,6 +30,7 @@ export function* getSnapshotFromUserAuth(userAuth, additionalInfo) {
     yield put(signInSuccess({ id: userSnapshot.id, ...userSnapshot.data() }));
     yield put(updateUserName(userAuth.displayName));
   } catch (error) {
+    alert("An error has occurred during getSnapshot: " + error.code);
     yield put(signInFailed(error));
   }
 }
@@ -43,8 +44,9 @@ export function* signInWithGoogle() {
     const { user } = yield call(signInWithGooglePopup);
     if (!user) return;
     yield call(getSnapshotFromUserAuth, user);
-    console.log("google sign in success");
+    console.log("You've successfully Google sign in");
   } catch (error) {
+    alert("An error has occurred during sign-in Google: " + error.code);
     yield put(signInFailed(error));
   }
 }
@@ -57,7 +59,9 @@ export function* signInWithEmail({ payload: { email, password } }) {
       password
     );
     yield call(getSnapshotFromUserAuth, user);
+    console.log("You've successfully sign in");
   } catch (error) {
+    alert("An error has occurred during sign-in with Email: " + error.code);
     yield put(signInFailed(error));
   }
 }
@@ -72,6 +76,7 @@ export function* startingSignUp({ payload: { email, password, displayName } }) {
     yield put(signUpSuccess(user, { displayName }));
     yield call(updateCurrentUserDisplayName, user, displayName);
   } catch (error) {
+    alert("An error has occurred during sign-up: " + error.code);
     yield put(signUpFailed(error));
   }
 }
@@ -81,6 +86,7 @@ export function* signOutCurrentUser() {
     yield call(signOutUser);
     yield put(signOutSuccess());
   } catch (error) {
+    alert("An error has occurred during sign-out: " + error.code);
     yield put(signOutFailed(error));
   }
 }
@@ -91,6 +97,7 @@ export function* isCurrentUserAuthenticated() {
     if (!userAuth) return;
     yield call(getSnapshotFromUserAuth, userAuth);
   } catch (error) {
+    alert("An error has occurred during sign-in auth user: " + error.code);
     yield put(signInFailed(error));
   }
 }
@@ -129,6 +136,6 @@ export function* userSaga() {
     call(onEmailSignInStart),
     call(onSignUpStart),
     call(onSignUpSuccess),
-    call(onSignOutStart)
+    call(onSignOutStart),
   ]);
 }
