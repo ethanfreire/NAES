@@ -2,7 +2,7 @@
 import { SignInContainer, ButtonsContainer } from "./sign-in.styles.jsx";
 import Button, {
   buttonVarietyClasses,
-} from "../../components/button/button.component.jsx";
+} from "../../components/button/button.component";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FormInput from "../../components/form-input/form-input.component";

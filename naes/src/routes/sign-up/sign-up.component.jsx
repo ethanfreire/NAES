@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 import Button, {
   buttonVarietyClasses,
-} from "../../components/button/button.component.jsx";
+} from "../../components/button/button.component";
 import { useDispatch } from "react-redux";
 import { updateUserName,signUpStart } from "../../store/user/user.action";
 const defaultFormFields = {

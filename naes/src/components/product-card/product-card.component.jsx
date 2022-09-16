@@ -6,10 +6,10 @@ import {
 } from "./product-card.styles.jsx";
 import Button, {
   buttonVarietyClasses,
-} from "../../components/button/button.component.jsx";
-import { addItemToCart } from "../../store/cart/cart.action.js";
+} from "../../components/button/button.component";
+import { addItemToCart } from "../../store/cart/cart.action";
 import { useDispatch, useSelector } from "react-redux";
-import { selectCartItems } from "../../store/cart/cart.selector.js";
+import { selectCartItems } from "../../store/cart/cart.selector";
 
 const ProductCard = ({ product }) => {
   const { name, imageUrl, price } = product;

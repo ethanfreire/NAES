@@ -7,8 +7,8 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   selectIsCartOpen,
   selectCartQuantity,
-} from "../../store/cart/cart.selector.js";
-import { setIsCartOpen } from "../../store/cart/cart.action.js";
+} from "../../store/cart/cart.selector";
+import { setIsCartOpen } from "../../store/cart/cart.action";
 
 const CartIcon = () => {
   const cartQuantity = useSelector(selectCartQuantity);

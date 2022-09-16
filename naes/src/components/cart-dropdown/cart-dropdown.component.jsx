@@ -1,8 +1,8 @@
 import { CartDropdownContainer,EmptyMessage, CartItems } from "./cart-dropdown.styles.jsx";
-import Button, {buttonVarietyClasses} from "../../components/button/button.component.jsx";
+import Button, {buttonVarietyClasses} from "../../components/button/button.component";
 import { useNavigate } from "react-router-dom";
 import CartItem from "../cart-item/cart-item.component";
-import { selectCartItems } from "../../store/cart/cart.selector.js";
+import { selectCartItems } from "../../store/cart/cart.selector";
 import { useSelector } from "react-redux";
 
 const CartDropdown = () => {
