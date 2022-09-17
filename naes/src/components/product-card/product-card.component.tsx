@@ -3,15 +3,19 @@ import {
   Footer,
   Name,
   Price,
-} from "./product-card.styles.jsx";
-import Button, {
-  buttonVarietyChoices,
-} from "../../components/button/button.component";
+} from "./product-card.styles";
+import Button, { buttonVarietyChoices } from "../button/button.component";
 import { addItemToCart } from "../../store/cart/cart.action";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCartItems } from "../../store/cart/cart.selector";
+import { CategoryItem } from "../../store/categories/category.types";
+import * as React from "react";
 
-const ProductCard = ({ product }) => {
+type ProductCardProps = {
+  product: CategoryItem;
+};
+
+const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { name, imageUrl, price } = product;
   const dispatch = useDispatch();
   const cartItems = useSelector(selectCartItems);

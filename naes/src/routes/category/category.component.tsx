@@ -9,8 +9,13 @@ import {
 import { useSelector } from "react-redux";
 import Spinner from "../../components/spinner/spinner.component";
 
+
+type CategoryRoutesParams = {
+  category: string;
+};
+
 const Category = () => {
-  const { category } = useParams();
+  const { category } = useParams<keyof CategoryRoutesParams>() as CategoryRoutesParams;
   console.log("render/rendering category component");
   const categoriesMap = useSelector(selectCategoriesMap);
   const isLoading = useSelector(selectCategoriesIsLoading);
