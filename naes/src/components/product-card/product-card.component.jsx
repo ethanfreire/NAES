@@ -5,7 +5,7 @@ import {
   Price,
 } from "./product-card.styles.jsx";
 import Button, {
-  buttonVarietyClasses,
+  buttonVarietyChoices,
 } from "../../components/button/button.component";
 import { addItemToCart } from "../../store/cart/cart.action";
 import { useDispatch, useSelector } from "react-redux";
@@ -25,7 +25,7 @@ const ProductCard = ({ product }) => {
       <img src={imageUrl} alt={`${name}`}></img>
 
       <Button
-        buttonVariety={buttonVarietyClasses.inverted}
+        buttonVariety={buttonVarietyChoices.inverted}
         onClick={addProductToCart}
       >
         Add to Cart

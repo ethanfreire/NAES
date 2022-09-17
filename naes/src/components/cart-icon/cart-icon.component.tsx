@@ -1,8 +1,9 @@
+/// <reference types="react-scripts" />
 import {
   ShoppingIcon,
   CartIconContainer,
   ItemCount,
-} from "./cart-icon.styles.jsx";
+} from "./cart-icon.styles";
 import { useSelector, useDispatch } from "react-redux";
 import {
   selectIsCartOpen,

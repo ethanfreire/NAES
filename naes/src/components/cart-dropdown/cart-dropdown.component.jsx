@@ -1,5 +1,5 @@
 import { CartDropdownContainer,EmptyMessage, CartItems } from "./cart-dropdown.styles.jsx";
-import Button, {buttonVarietyClasses} from "../../components/button/button.component";
+import Button, {buttonVarietyChoices} from "../../components/button/button.component";
 import { useNavigate } from "react-router-dom";
 import CartItem from "../cart-item/cart-item.component";
 import { selectCartItems } from "../../store/cart/cart.selector";
@@ -25,7 +25,7 @@ const CartDropdown = () => {
           )
         }
       </CartItems>
-      <Button buttonVariety={buttonVarietyClasses.base} onClick={goToCheckoutHandler}>Go To Checkout</Button>
+      <Button buttonVariety={buttonVarietyChoices.base} onClick={goToCheckoutHandler}>Go To Checkout</Button>
     </CartDropdownContainer>
   );
 };

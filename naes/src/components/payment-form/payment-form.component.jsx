@@ -1,5 +1,5 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import { buttonVarietyClasses } from "../button/button.component";
+import { buttonVarietyChoices } from "../button/button.component";
 import { PaymentFormContainer, FormContainer,PaymentButton } from "./payment-form.styles";
 import { useState } from "react";
 import { useSelector } from "react-redux";
@@ -60,7 +60,7 @@ const PaymentForm = () => {
         <CardElement></CardElement>
         <PaymentButton
           isLoading={isProcessingPayment}
-          buttonVariety={buttonVarietyClasses.inverted}
+          buttonVariety={buttonVarietyChoices.inverted}
         >
           Pay Now
         </PaymentButton>

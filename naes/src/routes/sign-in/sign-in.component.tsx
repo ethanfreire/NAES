@@ -1,13 +1,15 @@
-
-import { SignInContainer, ButtonsContainer } from "./sign-in.styles.jsx";
+import { SignInContainer, ButtonsContainer } from "./sign-in.styles";
 import Button, {
-  buttonVarietyClasses,
+  buttonVarietyChoices,
 } from "../../components/button/button.component";
-import { useState } from "react";
+import { useState, FormEvent, ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import FormInput from "../../components/form-input/form-input.component";
 import { useDispatch } from "react-redux";
-import {googleSignInStart,emailSignInStart} from '../../store/user/user.action'
+import {
+  googleSignInStart,
+  emailSignInStart,
+} from "../../store/user/user.action";
 
 const SignIn = () => {
   const defaultFormFields = {
@@ -23,8 +25,8 @@ const SignIn = () => {
 
   const signInWithGoogle = async () => {
     dispatch(googleSignInStart());
+
   };
- 
 
   const navigateToSignUp = () => {
     navigate("/sign-up");
@@ -33,7 +35,7 @@ const SignIn = () => {
   const navigateToHomePage = () => {
     navigate("/");
   };
-  const handleChange = (event) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormFields({ ...formFields, [name]: value });
   };
@@ -42,27 +44,12 @@ const SignIn = () => {
     setFormFields(defaultFormFields);
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    try {
-      
-      dispatch(emailSignInStart(email,password));
-      //useState Hooks causes re-rendering
-      resetFormFields();
-      navigateToHomePage();
-    } catch (error) {
-      switch (error.code) {
-        case "auth/wrong-password":
-          alert("incorrect password for email");
-          break;
-        case "auth/user-not-found":
-          alert("no user associated exist with this email");
-          break;
-        default:
-          console.log(error);
-      }
-    }
+    dispatch(emailSignInStart(email, password));
+    resetFormFields();
+    navigateToHomePage();
   };
 
   return (
@@ -73,32 +60,28 @@ const SignIn = () => {
       <form action="" onSubmit={handleSubmit}>
         <FormInput
           label="Email"
-          inputOptions={{
-            type: "email",
-            required: true,
-            onChange: handleChange,
-            name: "email",
-            value: email,
-          }}
+          type="email"
+          required
+          onChange={handleChange}
+          name="email"
+          value={email}
         />
 
         <FormInput
           label="Password"
-          inputOptions={{
-            type: "password",
-            required: true,
-            onChange: handleChange,
-            name: "password",
-            value: password,
-          }}
+          type="password"
+          required
+          onChange={handleChange}
+          name="password"
+          value={password}
         />
         <ButtonsContainer>
-          <Button buttonVariety={buttonVarietyClasses.base} type="submit">
+          <Button buttonVariety={buttonVarietyChoices.base} type="submit">
             Sign In
           </Button>
           <Button
             type="button"
-            buttonVariety={buttonVarietyClasses.google}
+            buttonVariety={buttonVarietyChoices.google}
             onClick={signInWithGoogle}
           >
             Google Sign In
@@ -107,7 +90,7 @@ const SignIn = () => {
       </form>
       <h3> If you want to be redirected to sign up page please click </h3>
       <Button
-        buttonVariety={buttonVarietyClasses.inverted}
+        buttonVariety={buttonVarietyChoices.inverted}
         onClick={navigateToSignUp}
       >
         Sign Up

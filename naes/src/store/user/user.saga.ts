@@ -5,7 +5,7 @@ import {
   SignUpSuccess,
   SignUpStart,
 } from "./user.types";
-import { User } from "firebase/auth";
+import { User, AuthError } from "firebase/auth";
 import { AdditionalInfo } from "../../utils/firebase/firebase.types";
 import {
   signInSuccess,
@@ -25,6 +25,10 @@ import {
   updateCurrentUserDisplayName,
   signOutUser,
 } from "../../utils/firebase/firebase.utils";
+
+const uiErrorAlert = (error: AuthError): void => {
+  return alert("Sign In Error has occurred: " + error.message.slice(10, 50));
+};
 
 export function* getSnapshotFromUserAuth(
   userAuth: User,
@@ -49,6 +53,7 @@ export function* getSnapshotFromUserAuth(
     }
   } catch (error) {
     yield* put(signInFailed(error as Error));
+    uiErrorAlert(error as AuthError);
   }
 }
 
@@ -66,6 +71,7 @@ export function* signInWithGoogle() {
     console.log("You've successfully Google sign in");
   } catch (error) {
     yield* put(signInFailed(error as Error));
+    uiErrorAlert(error as AuthError);
   }
 }
 
@@ -86,6 +92,7 @@ export function* signInWithEmail({
     }
   } catch (error) {
     yield* put(signInFailed(error as Error));
+    uiErrorAlert(error as AuthError);
   }
 }
 
@@ -106,6 +113,7 @@ export function* startingSignUp({
     }
   } catch (error) {
     yield* put(signUpFailed(error as Error));
+    uiErrorAlert(error as AuthError);
   }
 }
 
@@ -115,6 +123,7 @@ export function* signOutCurrentUser() {
     yield* put(signOutSuccess());
   } catch (error) {
     yield* put(signOutFailed(error as Error));
+    uiErrorAlert(error as AuthError);
   }
 }
 
@@ -125,6 +134,7 @@ export function* isCurrentUserAuthenticated() {
     yield* call(getSnapshotFromUserAuth, userAuth);
   } catch (error) {
     yield* put(signInFailed(error as Error));
+    uiErrorAlert(error as AuthError);
   }
 }
 

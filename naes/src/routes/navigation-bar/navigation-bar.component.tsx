@@ -29,7 +29,7 @@ const NavigationBar = () => {
 
   const signOutComplete = () => {
     dispatch(signOutStart());
-    dispatch(updateUserName(null));
+    dispatch(updateUserName(userName !== null ? userName : ''));
   };
 
   return (
