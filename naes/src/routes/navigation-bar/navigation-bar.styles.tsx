@@ -13,6 +13,10 @@ export const LogoContainer = styled(Link)`
   width: 10em;
   padding-top: 1.5em;
   padding-bottom: 1.5em;
+
+  @media screen and (max-width:50em) {
+    width:7em;
+} 
 `;
 
 export const NavLinksContainer = styled.div`

@@ -30,6 +30,7 @@ const App = () => {
         </Route>
       </Routes>
     </Suspense>
+    
   );
 };
 export default App;

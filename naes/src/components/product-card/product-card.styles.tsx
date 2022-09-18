@@ -33,6 +33,10 @@ export const ProductCardContainer = styled.div`
       display: flex;
     }
   }
+
+  @media screen and (max-width:50em) {
+    height: 13em;;
+  } 
 `;
 
 export const Footer = styled.div`

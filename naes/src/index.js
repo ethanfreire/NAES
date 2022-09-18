@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.scss";
+import { GlobalStyles } from "./global.styles";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
@@ -18,6 +18,7 @@ root.render(
         <BrowserRouter>
         <Elements stripe = {stripePromise}>
         <App />
+        <GlobalStyles/>
         </Elements>
         </BrowserRouter>
       </PersistGate>
