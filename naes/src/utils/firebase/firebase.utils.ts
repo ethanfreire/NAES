@@ -12,6 +12,7 @@ import {
   updateProfile,
   User,
   NextOrObserver,
+  AuthError,
 } from "firebase/auth";
 
 import {
@@ -64,7 +65,6 @@ export const addCollectionAndDocuments = async <T extends ObjectsToAdd>(
   });
 
   await batch.commit();
-  console.log("done");
 };
 
 export const getCategoriesAndDocuments = async (): Promise<Array<Category>> => {
@@ -85,30 +85,20 @@ export const createUserDocumentFromAuth = async (
   if (!userAuth) return;
   const userDocsRef = doc(db, "users", userAuth.uid);
 
-  console.log(userDocsRef);
-
   const userSnapshot = await getDoc(userDocsRef);
-  console.log(userSnapshot);
-  console.log("checking if user Already exist in db: " + userSnapshot.exists());
 
-  //if user does not exist
+  //if user does not exist in DB
   if (!userSnapshot.exists()) {
     const { displayName, email } = userAuth;
     const createdAt = new Date();
-    try {
-      //create new user
-
-      await setDoc(userDocsRef, {
-        displayName,
-        email,
-        createdAt,
-        ...additionalInfo,
-      });
-    } catch (error) {
-      console.log("error creating user ", error);
-    }
+    //create new user in DB
+    await setDoc(userDocsRef, {
+      displayName,
+      email,
+      createdAt,
+      ...additionalInfo,
+    });
   }
-
   return userSnapshot as QueryDocumentSnapshot<UserData>;
 };
 
@@ -116,7 +106,6 @@ export const updateCurrentUserDisplayName = (
   user: User,
   newDisplayName: string
 ) => {
-  console.log("your in update display call");
   return updateProfile(user, { displayName: newDisplayName });
 };
 

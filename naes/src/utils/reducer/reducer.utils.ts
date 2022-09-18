@@ -1,7 +1,7 @@
 import { AnyAction } from "redux";
 import { Action, ActionWithPayload, Matchable } from "./reducer.types";
 
-//action with payload
+//action WITH payload
 export function createAction<T extends string, P>(
   type: T,
   payload: P

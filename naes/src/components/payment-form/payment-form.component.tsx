@@ -39,11 +39,10 @@ const PaymentForm = () => {
       body: JSON.stringify({ amount: amount * 100 }),
     }).then((res) => res.json());
 
-    console.log(response);
+    
 
     const clientSecret = response.paymentIntent.client_secret;
-    console.log(clientSecret);
-
+    
     const cardDetails = elements.getElement(CardElement);
 
     if (!ifValidCardElement(cardDetails)) return;
@@ -60,7 +59,7 @@ const PaymentForm = () => {
     setIsProcessingPayment(false);
 
     if (paymentResult.error) {
-      alert(paymentResult.error);
+      alert(`Payment Failed: ${paymentResult.error}`);
     } else {
       if (paymentResult.paymentIntent.status === "succeeded") {
         alert("Payment Successful");

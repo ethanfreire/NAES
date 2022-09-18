@@ -27,14 +27,13 @@ import {
 } from "../../utils/firebase/firebase.utils";
 
 const uiErrorAlert = (error: AuthError): void => {
-  return alert("Sign In Error has occurred: " + error.message.slice(10, 50));
+  return alert("Error has occurred: " + error.message.slice(10, 50));
 };
 
 export function* getSnapshotFromUserAuth(
   userAuth: User,
   additionalInfo?: AdditionalInfo
 ) {
-  console.log("get user snapshot");
   try {
     const userSnapshot = yield* call(
       createUserDocumentFromAuth,
@@ -68,7 +67,6 @@ export function* signInWithGoogle() {
     const { user } = yield* call(signInWithGooglePopup);
     if (!user) return;
     yield* call(getSnapshotFromUserAuth, user);
-    console.log("You've successfully Google sign in");
   } catch (error) {
     yield* put(signInFailed(error as Error));
     uiErrorAlert(error as AuthError);
@@ -88,7 +86,6 @@ export function* signInWithEmail({
     if (userCredential) {
       const { user } = userCredential;
       yield* call(getSnapshotFromUserAuth, user);
-      console.log("You've successfully sign in");
     }
   } catch (error) {
     yield* put(signInFailed(error as Error));
