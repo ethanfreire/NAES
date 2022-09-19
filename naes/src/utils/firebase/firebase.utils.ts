@@ -12,7 +12,6 @@ import {
   updateProfile,
   User,
   NextOrObserver,
-  AuthError,
 } from "firebase/auth";
 
 import {
