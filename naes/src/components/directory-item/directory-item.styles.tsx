@@ -55,6 +55,14 @@ export const DirectoryItemContainer = styled.div`
   margin: 0 0.46875em 0.9375em;
   overflow: hidden;
 
+  &:first-child {
+    margin-right: 0.46875em;
+  }
+
+  &:last-child {
+    margin-left: 0.46875em;
+  }
+
   &:hover {
     cursor: pointer;
 
@@ -68,11 +76,7 @@ export const DirectoryItemContainer = styled.div`
     }
   }
 
-  &:first-child {
-    margin-right: 0.46875em;
-  }
-
-  &:last-child {
-    margin-left: 0.46875em;
+  @media screen and (max-width: 50em) {
+    height: 200px;
   }
 `;

@@ -34,9 +34,29 @@ export const ProductCardContainer = styled.div`
     }
   }
 
-  @media screen and (max-width:50em) {
-    height: 13em;;
-  } 
+  @media screen and (max-width: 50em) {
+    width: 40vw;
+
+    img {
+      height: 85%;
+    }
+
+    button {
+      display: block;
+      position: unset;
+      opacity: 0.9;
+      padding: 0 0.625em;
+    }
+
+    &:hover {
+      .image {
+        opacity: unset;
+      }
+      button {
+        opacity: unset;
+      }
+    }
+  }
 `;
 
 export const Footer = styled.div`
@@ -51,8 +71,18 @@ export const Footer = styled.div`
 export const Name = styled.span`
   width: 90%;
   margin-bottom: 0.9375em;
+
+  @media screen and (max-width: 50em) {
+    display: block;
+    
+  }
 `;
 
 export const Price = styled.span`
   width: 10%;
+
+  @media screen and (max-width: 50em) {
+    display: block;
+    
+  }
 `;

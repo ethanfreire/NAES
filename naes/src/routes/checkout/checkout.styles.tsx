@@ -7,6 +7,10 @@ export const CheckoutContainer = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 3.125em auto 0;
+
+  @media screen and (max-width: 50em) {
+    width: unset;
+  }
 `;
 
 export const ColumnHeaders = styled.div`
@@ -15,6 +19,10 @@ export const ColumnHeaders = styled.div`
   display: flex;
   justify-content: space-between;
   border-bottom: 0.0625em solid darkgrey;
+
+  @media screen and (max-width: 50em) {
+    width: null;
+  }
 `;
 
 export const ColumnTitle = styled.div`
@@ -24,6 +32,11 @@ export const ColumnTitle = styled.div`
   &:last-child {
     width: 8%;
   }
+
+  @media screen and (max-width: 50em) {
+    width: unset;
+  }
+  
 `;
 
 export const CartTotal = styled.span`
