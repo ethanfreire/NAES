@@ -9,7 +9,7 @@ type CategoryPreviewProps = {
   products: Array<CategoryItem>;
 };
 
-const CategoryPreview: React.FC<CategoryPreviewProps> = ({ title, products }) => {
+const CategoryPreview: React.FC<React.PropsWithChildren<CategoryPreviewProps>> = ({ title, products }) => {
  
   return (
     <CategoryPreviewContainer>

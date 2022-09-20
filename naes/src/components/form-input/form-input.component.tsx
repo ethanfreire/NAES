@@ -5,7 +5,7 @@ export type FormInputProps = {
   label: string;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
-const FormInput: React.FC<FormInputProps> = ({ label, ...inputOptions }) => {
+const FormInput: React.FC<React.PropsWithChildren<FormInputProps>> = ({ label, ...inputOptions }) => {
   return (
     <Group>
       <Input {...inputOptions} />

@@ -6,7 +6,7 @@ type CartItemsProps = {
   cartItem: TypeCartItem;
 };
 
-const CartItem: React.FC<CartItemsProps> = React.memo(({ cartItem }) => {
+const CartItem: React.FC<React.PropsWithChildren<CartItemsProps>> = React.memo(({ cartItem }) => {
   const { name, quantity, price, imageUrl } = cartItem;
 
   return (

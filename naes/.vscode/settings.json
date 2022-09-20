@@ -1,5 +1,8 @@
 {
     "cSpell.words": [
         "naes"
-    ]
+    ],
+    "typescript.tsdk": "/Users/ethanfreire/.nvm/versions/node/v18.4.0/lib/node_modules/typescript",
+    "vsintellicode.features.apiExamplests": "default",
+    "typescript.validate.enable": true
 }

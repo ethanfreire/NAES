@@ -21,7 +21,7 @@ type CheckoutItemProps = {
   cartItem: CartItem;
 };
 
-const CheckoutItem: React.FC<CheckoutItemProps> = ({ cartItem }) => {
+const CheckoutItem: React.FC<React.PropsWithChildren<CheckoutItemProps>> = ({ cartItem }) => {
   const { name, price, quantity, imageUrl } = cartItem;
 
   const dispatch = useDispatch();

@@ -1,3 +1,4 @@
+
 import {
   BaseButton,
   GoogleSignInButton,
@@ -27,7 +28,7 @@ export type ButtonProps = {
   isLoading?: boolean;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-const Button: React.FC<ButtonProps> = ({
+const Button: React.FC<ButtonProps>= ({
   children,
   buttonVariety,
   isLoading,
@@ -35,9 +36,11 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   const CustomButton = getButtonVariety(buttonVariety);
   return (
+    
     <CustomButton disabled={isLoading} {...buttonFunctionType}>
       {isLoading ? <ButtonSpinner></ButtonSpinner> : children}
     </CustomButton>
+  
   );
 };
 

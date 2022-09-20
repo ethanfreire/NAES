@@ -11,7 +11,7 @@ type DirectoryItemProps ={
   category: DirectoryCategories;
 };
 
-const DirectoryItem: React.FC<DirectoryItemProps> = ({ category }) => {
+const DirectoryItem: React.FC<React.PropsWithChildren<DirectoryItemProps>> = ({ category }) => {
   const { imageUrl, title,route } = category;
   const navigate = useNavigate();
 

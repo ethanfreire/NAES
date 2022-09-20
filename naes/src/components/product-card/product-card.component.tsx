@@ -15,7 +15,7 @@ type ProductCardProps = {
   product: CategoryItem;
 };
 
-const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+const ProductCard: React.FC<React.PropsWithChildren<ProductCardProps>> = ({ product }) => {
   const { name, imageUrl, price } = product;
   const dispatch = useDispatch();
   const cartItems = useSelector(selectCartItems);
